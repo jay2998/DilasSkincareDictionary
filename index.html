@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dila's Skincare Product Dictionary</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #f0f8ff, #ffe6f0); /* same gradient as ruler */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #ff1493;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .search-container {
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      justify-content: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .ingredient-list {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .ingredient {
+      background-color: #ffb6c1;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .ingredient:hover {
+      transform: scale(1.02);
+    }
+
+    .ingredient-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #ff1493;
+    }
+
+    .ingredient-description {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dila's Skincare Product Dictionary</h1>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for an ingredient...">
+  </div>
+
+  <div class="ingredient-list" id="ingredientList"></div>
+
+  <script>
+    // List of skincare ingredients
+    const ingredients = [
+      { name: "Hyaluronic Acid", description: "Hydrates and retains moisture in the skin." },
+      { name: "Retinol", description: "Reduces wrinkles, promotes skin cell turnover." },
+      { name: "Vitamin C", description: "Brightens skin, fights free radicals, improves collagen." },
+      { name: "Niacinamide", description: "Reduces redness, improves skin barrier, regulates oil." },
+      { name: "Salicylic Acid", description: "Exfoliates and unclogs pores, treats acne." },
+      { name: "Glycerin", description: "Moisturizes and softens skin." },
+      { name: "Peptides", description: "Stimulates collagen, firms skin." },
+      { name: "Ceramides", description: "Strengthens skin barrier and locks in moisture." },
+      { name: "AHA (Glycolic/Lactic Acid)", description: "Exfoliates dead skin cells for smoother skin." },
+      { name: "Squalane", description: "Hydrates, mimics skin’s natural oils." },
+      { name: "Zinc Oxide", description: "Physical sunscreen, protects from UV rays." },
+      { name: "Shea Butter", description: "Moisturizes and soothes dry skin." },
+      { name: "Vitamin E", description: "Antioxidant, protects skin from damage." }
+    ];
+
+    const ingredientList = document.getElementById('ingredientList');
+    const searchInput = document.getElementById('searchInput');
+
+    // Function to display ingredients
+    function displayIngredients(list) {
+      ingredientList.innerHTML = '';
+      list.forEach(ingredient => {
+        const div = document.createElement('div');
+        div.className = 'ingredient';
+        div.innerHTML = `
+          <div class="ingredient-name">${ingredient.name}</div>
+          <div class="ingredient-description">${ingredient.description}</div>
+        `;
+        ingredientList.appendChild(div);
+      });
+    }
+
+    // Initial display
+    displayIngredients(ingredients);
+
+    // Search functionality
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = ingredients.filter(i => i.name.toLowerCase().includes(query));
+      displayIngredients(filtered);
+    });
+  </script>
+
+</body>
+</html>
